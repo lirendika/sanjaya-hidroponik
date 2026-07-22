@@ -1,0 +1,483 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+import { getCollection } from 'astro:content';
+
+const produkAll = (await getCollection('produk')).sort(
+  (a, b) => a.data.urutan - b.data.urutan
+);
+
+const wa = (teks) =>
+  `https://wa.me/${site.waNomor}?text=${encodeURIComponent(teks)}`;
+const waUmum = wa(site.waTeksDefault);
+const kategori = ['Semua', 'Melon', 'Salad', 'Sayuran'];
+
+const navItems = [
+  ['#tentang', 'Tentang'],
+  ['#produk', 'Produk'],
+  ['#keunggulan', 'Keunggulan'],
+  ['#galeri', 'Galeri'],
+  ['#wisata', 'Wisata'],
+  ['#lokasi', 'Lokasi'],
+];
+
+const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.79 14.02c-.25.7-1.45 1.34-2 1.42-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.25-1.66-1.25-3.17 0-1.51.79-2.25 1.07-2.56.28-.31.61-.38.81-.38.2 0 .4.002.58.01.19.008.44-.07.68.52.25.6.85 2.07.92 2.22.08.15.13.33.03.53-.1.2-.15.33-.3.5-.15.18-.31.39-.44.53-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.64-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.68-.15.28.1 1.75.83 2.05.98.3.15.5.22.57.35.08.13.08.73-.17 1.43z"/></svg>`;
+---
+
+<Base>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav">
+      <a href="#top" class="brand" aria-label="Sanjaya Hidroponik — ke atas">
+        <img src="/images/logo-sanjaya.png" alt="Logo Sanjaya Mirai Hidroponik" width="40" height="40" />
+        <span><b>Sanjaya Hidroponik</b><small>{site.tagline}</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Navigasi utama">
+        {navItems.map(([href, label]) => <a href={href}>{label}</a>)}
+      </nav>
+      <a href={waUmum} class="btn btn-wa nav-cta" target="_blank" rel="noopener">
+        <Fragment set:html={waIcon} /> Pesan
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <div>
+        {navItems.map(([href, label]) => <a href={href}>{label}</a>)}
+        <a href={waUmum} class="btn btn-wa" target="_blank" rel="noopener">
+          <Fragment set:html={waIcon} /> Pesan via WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero hero-grain" id="top">
+    <div class="hero-bg" aria-hidden="true">
+      <img src={site.heroGambar} alt="" fetchpriority="high" />
+    </div>
+
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <div class="hero-brandrow" data-reveal>
+          <img src="/images/logo-sanjaya.png" alt="" width="44" height="44" />
+          <span class="t">{site.tagline}</span>
+        </div>
+        <h1 data-reveal style="--d:.08s">
+          Melon & Sayuran Hidroponik <em>Segar</em> dari Kediri
+        </h1>
+        <p class="sub" data-reveal style="--d:.16s">{site.heroSubjudul}</p>
+        <div class="hero-actions" data-reveal style="--d:.24s">
+          <a href={waUmum} class="btn btn-wa btn-lg" target="_blank" rel="noopener">
+            <Fragment set:html={waIcon} /> Pesan via WhatsApp
+          </a>
+          <a href="#produk" class="btn btn-ghost btn-lg">Lihat Produk</a>
+        </div>
+        <div class="hero-badges" data-reveal style="--d:.32s">
+          <span>🌱 Bebas Pestisida</span>
+          <span>💧 Nutrisi Terkontrol</span>
+          <span>🍈 Wisata Petik Melon</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="hero-card" aria-hidden="true">
+      <div class="hc-top"><span class="hc-ic">🍈</span><b>Melon Premium</b></div>
+      <div class="price">{site.hargaMelon}</div>
+      <p>3 varietas manis — Sweetnet 9, Lavender & Sweet Hami. Bisa petik sendiri di kebun.</p>
+    </aside>
+
+    <div class="scroll-hint" aria-hidden="true"></div>
+  </section>
+
+  <!-- TRUST MARQUEE -->
+  <div class="trustbar" aria-label="Keunggulan singkat">
+    <div class="trust-track">
+      {[0, 1].map((i) => (
+        <div class="trust-group" aria-hidden={i === 1 ? 'true' : undefined}>
+          {site.kredibilitas.map((k) => (
+            <div class="trust-item"><span class="ic">{k.ikon}</span><p>{k.teks}</p></div>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- TENTANG -->
+  <section class="about" id="tentang">
+    <div class="container about-grid">
+      <div class="collage" data-reveal>
+        <figure class="collage-main">
+          <img src={site.tentangGambar} alt="Greenhouse hidroponik Sanjaya" loading="lazy" />
+        </figure>
+        <figure class="collage-accent">
+          <img src={site.tentangGambarAksen} alt="Pengecekan bobot melon di kebun" loading="lazy" />
+          <figcaption>✓ {site.tentangAksenTeks}</figcaption>
+        </figure>
+        <div class="rot-badge" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <circle class="bgc" cx="60" cy="60" r="58" />
+            <defs>
+              <path id="rotPath" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0" />
+            </defs>
+            <text><textPath href="#rotPath">Sanjaya Mirai Hidroponik • Sejak 2019 • Kediri •&nbsp;</textPath></text>
+          </svg>
+          <img src="/images/logo-sanjaya.png" alt="" width="52" height="52" />
+        </div>
+      </div>
+
+      <div class="about-text" data-reveal style="--d:.1s">
+        <span class="eyebrow left">Tentang Kami</span>
+        <h2>Segar dari Greenhouse, <span class="accent-i">Sehat</span> untuk Keluarga</h2>
+        <p>{site.tentangTeks}</p>
+        <div class="about-stats">
+          <div class="stat"><strong>2019</strong><small>Berdiri sejak</small></div>
+          <div class="stat"><strong>100%</strong><small>Tanpa pestisida</small></div>
+          <div class="stat"><strong>3+</strong><small>Varietas melon</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUK -->
+  <section id="produk">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Produk Kami</span>
+        <h2>Melon, Salad & Sayuran <span class="accent-i">Pilihan</span></h2>
+        <p>Melon premium {site.hargaMelon}. Untuk harga salad & sayuran, silakan tanya langsung via WhatsApp.</p>
+      </div>
+
+      <div class="filter-bar" id="filterBar" data-reveal role="tablist" aria-label="Filter kategori produk">
+        {kategori.map((k, i) => (
+          <button class={i === 0 ? 'active' : ''} data-filter={k} role="tab" aria-selected={i === 0 ? 'true' : 'false'}>{k}</button>
+        ))}
+      </div>
+
+      <div class="produk-grid" id="produkGrid">
+        {produkAll.map((p, i) => (
+          <article class={`card${p.data.tersedia ? '' : ' soldout'}`} data-kat={p.data.kategori} data-reveal style={`--d:${(i % 3) * 0.08}s`}>
+            <div class="card-img">
+              <img src={p.data.gambar} alt={p.data.nama} loading="lazy" />
+              {p.data.badge && <span class="card-badge">{p.data.badge}</span>}
+              <span class="card-kat">{p.data.kategori}</span>
+            </div>
+            <div class="card-body">
+              <h3>{p.data.nama}</h3>
+              <p class="desc">{p.data.deskripsi}</p>
+              <div class="card-foot">
+                <span class={`card-price${p.data.harga.toLowerCase().includes('rp') ? '' : ' small'}`}>{p.data.harga}</span>
+                {p.data.tersedia ? (
+                  <a class="btn btn-wa" target="_blank" rel="noopener"
+                     href={wa(`Halo Sanjaya Hidroponik, saya ingin memesan ${p.data.nama}.`)}>Pesan</a>
+                ) : (
+                  <span class="soldout-tag">Stok habis</span>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- KEUNGGULAN -->
+  <section class="why" id="keunggulan">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Kenapa Sanjaya</span>
+        <h2>Ditanam dengan <span style="color:var(--lime);font-style:italic;font-weight:500">Teliti</span>, Dipanen dengan Cinta</h2>
+      </div>
+      <div class="why-grid">
+        {site.keunggulan.map((k, i) => (
+          <div class="why-card" data-reveal style={`--d:${i * 0.07}s`}>
+            <div class="ic">{k.ikon}</div>
+            <h3>{k.judul}</h3>
+            <p>{k.teks}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERI -->
+  <section class="galeri" id="galeri">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">Galeri Kebun</span>
+      <h2>Sekilas dari <span class="accent-i">Greenhouse</span> Kami</h2>
+    </div>
+    <div class="galeri-strip" id="galeriStrip" data-reveal>
+      {site.galeri.map((g) => (
+        <figure class="galeri-item">
+          <img src={g.gambar} alt={g.keterangan} loading="lazy" draggable="false" />
+          <figcaption>{g.keterangan}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="galeri-hint" aria-hidden="true">← geser untuk melihat →</p>
+  </section>
+
+  <!-- AGROWISATA & EDUKASI -->
+  <section id="wisata" style="padding-top:0">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Kunjungi Kebun Kami</span>
+        <h2>Agrowisata & <span class="accent-i">Edukasi</span></h2>
+        <p>Bukan sekadar membeli — datang, petik sendiri, dan belajar langsung di greenhouse kami.</p>
+      </div>
+      <div class="wisata-cards">
+        <article class="wisata-card" data-reveal>
+          <div class="wc-img">
+            <img src={site.wisataGambar} alt="Wisata petik melon" loading="lazy" />
+            <span class="wc-tag">🎫 Tiket Masuk Gratis</span>
+          </div>
+          <div class="wc-body">
+            <h3>{site.wisataJudul}</h3>
+            <p>{site.wisataTeks}</p>
+            <a href={wa('Halo Sanjaya Hidroponik, saya ingin bertanya tentang Wisata Petik Melon.')}
+               class="btn btn-primary" target="_blank" rel="noopener">Tanya Jadwal Kunjungan</a>
+          </div>
+        </article>
+        <article class="wisata-card" data-reveal style="--d:.12s">
+          <div class="wc-img">
+            <img src={site.outingGambar} alt="Outing class edukasi sekolah" loading="lazy" />
+            <span class="wc-tag">🎓 Untuk Sekolah</span>
+          </div>
+          <div class="wc-body">
+            <h3>{site.outingJudul}</h3>
+            <p>{site.outingTeks}</p>
+            <a href={wa('Halo Sanjaya Hidroponik, saya ingin mengajukan kegiatan Outing Class / edukasi sekolah.')}
+               class="btn btn-primary" target="_blank" rel="noopener">Ajukan Outing Class</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARA PESAN -->
+  <section class="steps" id="cara-pesan">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Cara Pesan</span>
+        <h2>Mudah, Cukup <span class="accent-i">5 Langkah</span></h2>
+      </div>
+      <div class="steps-grid">
+        {site.caraPesan.map((s, i) => (
+          <div class="step" data-reveal style={`--d:${i * 0.09}s`}>
+            <div class="num">{i + 1}</div>
+            <div class="step-body">
+              <h3>{s.judul}</h3>
+              <p>{s.teks}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="market-note" data-reveal>
+        <p>Salad & sayuran juga tersedia di aplikasi favorit Anda — cari <strong>"Sanjaya Salad"</strong>:</p>
+        <div class="market-chips">
+          {site.marketplace.map((m) => <span>{m}</span>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" style="padding-top:84px">
+    <div class="container">
+      <div class="cta-panel hero-grain" data-reveal>
+        <div class="cta-inner">
+          <h2>Siap menikmati <em>panen terbaik</em> minggu ini?</h2>
+          <p>Stok melon & sayuran segar terbatas setiap panen. Hubungi kami sekarang — dijamin fresh dari greenhouse.</p>
+          <div class="cta-actions">
+            <a href={waUmum} class="btn btn-wa btn-lg" target="_blank" rel="noopener">
+              <Fragment set:html={waIcon} /> Chat WhatsApp
+            </a>
+            <a href={`https://instagram.com/${site.instagram}`} class="btn btn-ghost btn-lg" target="_blank" rel="noopener">
+              Ikuti Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOKASI & KONTAK -->
+  <section id="lokasi" style="padding-top:0">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Lokasi & Kontak</span>
+        <h2>Kunjungi atau <span class="accent-i">Hubungi</span> Kami</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info" data-reveal>
+          <div class="info-item">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.1-7-11a7 7 0 1 1 14 0c0 5.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+            <div><h4>Alamat Kantor</h4><p>{site.alamat}</p></div>
+          </div>
+          <div class="info-item">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.4-2 8-6.2 8-11V7l-8-4-8 4v4c0 4.8 3.6 9 8 11z" opacity=".0"/><path d="M12 21c-4-3.5-6-7-6-10a6 6 0 0 1 12 0c0 3-2 6.5-6 10z" opacity="0"/><path d="M5 21c8 0 14-6 14-14v-2h-2C9 5 3 11 3 19v2h2z"/><path d="M9 15c2-2 5-4 8-5"/></svg></div>
+            <div><h4>Kebun & Wisata Petik</h4><p>{site.lokasiKebun}</p></div>
+          </div>
+          <div class="info-item">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+            <div><h4>Jam Buka</h4><p>{site.jamBuka}</p></div>
+          </div>
+          <div class="info-item">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm0 18.15c-1.48 0-2.93-.4-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 01-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 012.41 5.82c0 4.54-3.69 8.23-8.24 8.23z"/></svg></div>
+            <div><h4>WhatsApp</h4><a href={waUmum} target="_blank" rel="noopener">+{site.waNomor}</a></div>
+          </div>
+          <div class="info-item">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></div>
+            <div><h4>Instagram</h4><a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener">@{site.instagram}</a></div>
+          </div>
+        </div>
+        <div class="map-wrap" data-reveal style="--d:.1s">
+          <iframe
+            title="Lokasi Sanjaya Hidroponik di Google Maps"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src={`https://www.google.com/maps?q=${encodeURIComponent(site.mapsQuery)}&output=embed`}
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-top">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="/images/logo-sanjaya.png" alt="Logo" width="48" height="48" />
+          <span><b>{site.namaLengkap}</b><small>{site.tagline}</small></span>
+        </div>
+        <p>Melon & sayuran hidroponik segar, higienis, dan bebas pestisida — dibudidayakan penuh cinta dari Kota Kediri, Jawa Timur.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigasi</h4>
+        {navItems.map(([href, label]) => <a href={href}>{label}</a>)}
+      </div>
+      <div class="footer-col">
+        <h4>Hubungi Kami</h4>
+        <a href={waUmum} target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2z"/></svg>
+          +{site.waNomor}
+        </a>
+        <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/></svg>
+          @{site.instagram}
+        </a>
+        <p style="margin-top:10px;font-size:.88rem;color:rgba(255,255,255,.6)">{site.alamat}</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© {new Date().getFullYear()} {site.namaLengkap}. Seluruh hak cipta dilindungi.</span>
+      <span>{site.tagline} 🌱</span>
+    </div>
+  </footer>
+
+  <!-- WA float -->
+  <a href={waUmum} class="wa-float" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.79 14.02c-.25.7-1.45 1.34-2 1.42-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.25-1.66-1.25-3.17 0-1.51.79-2.25 1.07-2.56.28-.31.61-.38.81-.38.2 0 .4.002.58.01.19.008.44-.07.68.52.25.6.85 2.07.92 2.22.08.15.13.33.03.53-.1.2-.15.33-.3.5-.15.18-.31.39-.44.53-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.64-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.68-.15.28.1 1.75.83 2.05.98.3.15.5.22.57.35.08.13.08.73-.17 1.43z"/></svg>
+  </a>
+
+  <script is:inline>
+    // ===== Menu mobile =====
+    const t = document.getElementById('navToggle');
+    const m = document.getElementById('mobileMenu');
+    if (t && m) {
+      t.addEventListener('click', () => {
+        const open = m.classList.toggle('open');
+        t.classList.toggle('open', open);
+        t.setAttribute('aria-expanded', open);
+      });
+      m.querySelectorAll('a').forEach((a) =>
+        a.addEventListener('click', () => {
+          m.classList.remove('open');
+          t.classList.remove('open');
+          t.setAttribute('aria-expanded', 'false');
+        })
+      );
+    }
+
+    // ===== Filter produk =====
+    const bar = document.getElementById('filterBar');
+    const cards = Array.from(document.querySelectorAll('#produkGrid .card'));
+    if (bar) {
+      bar.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        bar.querySelectorAll('button').forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        const f = btn.dataset.filter;
+        cards.forEach((c) => {
+          c.style.display = f === 'Semua' || c.dataset.kat === f ? '' : 'none';
+        });
+      });
+    }
+
+    // ===== Reveal on scroll =====
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting) {
+              en.target.classList.add('in');
+              io.unobserve(en.target);
+            }
+          });
+        },
+        { threshold: 0.14, rootMargin: '0px 0px -6% 0px' }
+      );
+      revealEls.forEach((el) => io.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add('in'));
+    }
+
+    // ===== Scrollspy nav =====
+    const spyLinks = Array.from(document.querySelectorAll('.nav-links a'));
+    const spyMap = new Map();
+    spyLinks.forEach((a) => {
+      const sec = document.querySelector(a.getAttribute('href'));
+      if (sec) spyMap.set(sec, a);
+    });
+    if ('IntersectionObserver' in window && spyMap.size) {
+      const spy = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting) {
+              spyLinks.forEach((l) => l.classList.remove('active'));
+              const link = spyMap.get(en.target);
+              link && link.classList.add('active');
+            }
+          });
+        },
+        { rootMargin: '-38% 0px -55% 0px' }
+      );
+      spyMap.forEach((_, sec) => spy.observe(sec));
+    }
+
+    // ===== Galeri: drag-to-scroll =====
+    const strip = document.getElementById('galeriStrip');
+    if (strip) {
+      let down = false, startX = 0, startScroll = 0;
+      strip.addEventListener('pointerdown', (e) => {
+        down = true; startX = e.clientX; startScroll = strip.scrollLeft;
+        strip.classList.add('dragging');
+      });
+      window.addEventListener('pointermove', (e) => {
+        if (!down) return;
+        strip.scrollLeft = startScroll - (e.clientX - startX);
+      });
+      window.addEventListener('pointerup', () => {
+        down = false; strip.classList.remove('dragging');
+      });
+    }
+  </script>
+</Base>

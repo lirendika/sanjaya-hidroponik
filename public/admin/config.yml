@@ -1,0 +1,114 @@
+# Konfigurasi Decap CMS — panel kelola konten di /admin
+# Pemilik login pakai email (Netlify Identity), lalu edit lewat form.
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Simpan perubahan sebagai draf dulu sebelum tayang (opsional, aman untuk pemula)
+publish_mode: editorial_workflow
+
+media_folder: "public/images"   # tempat file gambar disimpan di repo
+public_folder: "/images"        # alamat gambar saat tampil di website
+
+locale: "id"
+
+collections:
+  # ============ PRODUK ============
+  - name: "produk"
+    label: "Produk"
+    label_singular: "Produk"
+    folder: "src/content/produk"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{nama}} — {{kategori}}"
+    sortable_fields: ["urutan", "nama", "kategori"]
+    fields:
+      - { label: "Nama Produk", name: "nama", widget: "string" }
+      - label: "Kategori"
+        name: "kategori"
+        widget: "select"
+        options: ["Melon", "Salad", "Sayuran"]
+      - { label: "Harga (mis. Rp 27.000 / kg, atau: Hubungi via WhatsApp)", name: "harga", widget: "string" }
+      - { label: "Foto Produk", name: "gambar", widget: "image", choose_url: false }
+      - { label: "Deskripsi Singkat", name: "deskripsi", widget: "text" }
+      - { label: "Label (mis. Terlaris / Best Seller — kosongkan bila tidak ada)", name: "badge", widget: "string", required: false, default: "" }
+      - { label: "Tersedia / Ada Stok?", name: "tersedia", widget: "boolean", default: true }
+      - { label: "Urutan Tampil (angka kecil tampil lebih dulu)", name: "urutan", widget: "number", default: 99, value_type: "int" }
+      - { label: "Keterangan Tambahan (opsional)", name: "body", widget: "markdown", required: false }
+
+  # ============ PENGATURAN SITUS ============
+  - name: "pengaturan"
+    label: "Pengaturan Situs"
+    files:
+      - name: "umum"
+        label: "Teks & Kontak Website"
+        file: "src/data/site.json"
+        description: "Ubah teks utama, nomor WhatsApp, alamat, dan lainnya."
+        fields:
+          - { label: "Nama Singkat", name: "namaSingkat", widget: "string" }
+          - { label: "Nama Lengkap Perusahaan", name: "namaLengkap", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
+
+          - { label: "Judul Utama (Hero)", name: "heroJudul", widget: "string" }
+          - { label: "Kalimat Pembuka (Hero)", name: "heroSubjudul", widget: "text" }
+          - { label: "Foto Latar Hero", name: "heroGambar", widget: "image" }
+
+          - { label: "Nomor WhatsApp (format 62..., tanpa 0 & tanpa spasi)", name: "waNomor", widget: "string", hint: "Contoh: 6281339220499" }
+          - { label: "Teks Default Pesan WhatsApp", name: "waTeksDefault", widget: "text" }
+
+          - { label: "Teks Tentang Kami", name: "tentangTeks", widget: "text" }
+          - { label: "Foto Bagian Tentang", name: "tentangGambar", widget: "image" }
+          - { label: "Foto Kecil (aksen) Bagian Tentang", name: "tentangGambarAksen", widget: "image" }
+          - { label: "Keterangan Foto Kecil", name: "tentangAksenTeks", widget: "string" }
+
+          - { label: "Harga Melon (untuk info umum)", name: "hargaMelon", widget: "string" }
+
+          - label: "Poin Kredibilitas (baris kepercayaan)"
+            name: "kredibilitas"
+            widget: "list"
+            fields:
+              - { label: "Ikon (emoji)", name: "ikon", widget: "string" }
+              - { label: "Teks", name: "teks", widget: "string" }
+
+          - label: "Keunggulan"
+            name: "keunggulan"
+            widget: "list"
+            fields:
+              - { label: "Ikon (emoji)", name: "ikon", widget: "string" }
+              - { label: "Judul", name: "judul", widget: "string" }
+              - { label: "Penjelasan", name: "teks", widget: "text" }
+
+          - label: "Langkah Cara Pesan"
+            name: "caraPesan"
+            widget: "list"
+            fields:
+              - { label: "Judul Langkah", name: "judul", widget: "string" }
+              - { label: "Penjelasan", name: "teks", widget: "text" }
+
+          - label: "Marketplace (GoFood, dll)"
+            name: "marketplace"
+            widget: "list"
+            field: { label: "Nama Aplikasi", name: "nama", widget: "string" }
+
+          - { label: "Alamat Kantor", name: "alamat", widget: "text" }
+          - { label: "Lokasi Kebun / Wisata", name: "lokasiKebun", widget: "text" }
+          - { label: "Kata Kunci Google Maps", name: "mapsQuery", widget: "string", hint: "Mis: Sanjaya & TT Hidroponik Melon Kediri" }
+          - { label: "Jam Buka", name: "jamBuka", widget: "string" }
+          - { label: "Username Instagram (tanpa @)", name: "instagram", widget: "string" }
+          - { label: "Nama Direktur", name: "direktur", widget: "string" }
+
+          - { label: "Judul Wisata Petik Melon", name: "wisataJudul", widget: "string" }
+          - { label: "Teks Wisata Petik Melon", name: "wisataTeks", widget: "text" }
+          - { label: "Foto Wisata Petik Melon", name: "wisataGambar", widget: "image" }
+
+          - label: "Galeri Foto Kebun"
+            name: "galeri"
+            widget: "list"
+            fields:
+              - { label: "Foto", name: "gambar", widget: "image" }
+              - { label: "Keterangan Singkat", name: "keterangan", widget: "string" }
+
+          - { label: "Judul Outing Class / Edukasi", name: "outingJudul", widget: "string" }
+          - { label: "Teks Outing Class / Edukasi", name: "outingTeks", widget: "text" }
+          - { label: "Foto Outing Class / Edukasi", name: "outingGambar", widget: "image" }
