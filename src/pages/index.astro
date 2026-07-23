@@ -22,13 +22,31 @@ const navItems = [
 ];
 
 const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.79 14.02c-.25.7-1.45 1.34-2 1.42-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.25-1.66-1.25-3.17 0-1.51.79-2.25 1.07-2.56.28-.31.61-.38.81-.38.2 0 .4.002.58.01.19.008.44-.07.68.52.25.6.85 2.07.92 2.22.08.15.13.33.03.53-.1.2-.15.33-.3.5-.15.18-.31.39-.44.53-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.64-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.68-.15.28.1 1.75.83 2.05.98.3.15.5.22.57.35.08.13.08.73-.17 1.43z"/></svg>`;
+
+// Set ikon garis (line-icon) SVG. Warna mengikuti currentColor.
+const S = (p) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const icons = {
+  sprout: S('<path d="M12 22V10"/><path d="M12 12C12 8 9 5 4 5c0 5 3 7 8 7z"/><path d="M12 14c0-3 3-6 8-6 0 4-3 6-8 6z"/>'),
+  leaf: S('<path d="M5 21c0-7 4-13 15-15C19 15 14 21 8 21c-1.6 0-3-1.2-3-3z"/><path d="M9 17c2.5-3.5 5-5.5 8-6.5"/>'),
+  shield: S('<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/>'),
+  droplet: S('<path d="M12 3s6 6 6 10a6 6 0 0 1-12 0c0-4 6-10 6-10z"/>'),
+  calendar: S('<rect x="4" y="5" width="16" height="16" rx="2.5"/><path d="M8 3v4M16 3v4M4 10h16"/><path d="M9 15l2 2 4-4"/>'),
+  truck: S('<path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="18.5" r="1.7"/><circle cx="17.5" cy="18.5" r="1.7"/>'),
+  building: S('<path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4h6v4"/><path d="M9 10h.01M12 10h.01M15 10h.01M9 14h.01M12 14h.01M15 14h.01"/>'),
+  cap: S('<path d="M2 9l10-4 10 4-10 4z"/><path d="M6 11v5c0 1.2 3 2.2 6 2.2s6-1 6-2.2v-5"/><path d="M22 9v5"/>'),
+  melon: S('<circle cx="12" cy="13" r="8"/><path d="M12 5V3"/><path d="M12 5c-3 2-4.6 5-4.6 8M12 5c3 2 4.6 5 4.6 8M5 10c3.6 1.6 10.4 1.6 14 0M6 16.5c3 1.2 9 1.2 12 0"/>'),
+  ticket: S('<path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2 2 2 0 0 0 0 4 2 2 0 0 1 0 4v0a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2 2 2 0 0 0 0-4 2 2 0 0 1 0-4z"/><path d="M14 6v1M14 11v2M14 17v1"/>'),
+  check: S('<path d="M4 12l5 5L20 6"/>'),
+  chevronL: S('<path d="M15 6l-6 6 6 6"/>'),
+  chevronR: S('<path d="M9 6l6 6-6 6"/>'),
+};
 ---
 
 <Base>
   <!-- HEADER -->
   <header class="header">
     <div class="container nav">
-      <a href="#top" class="brand" aria-label="Sanjaya Hidroponik — ke atas">
+      <a href="#top" class="brand" aria-label="Sanjaya Hidroponik, ke atas">
         <img src="/images/logo-sanjaya.png" alt="Logo Sanjaya Mirai Hidroponik" width="40" height="40" />
         <span><b>Sanjaya Hidroponik</b><small>{site.tagline}</small></span>
       </a>
@@ -75,17 +93,17 @@ const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentCol
           <a href="#produk" class="btn btn-ghost btn-lg">Lihat Produk</a>
         </div>
         <div class="hero-badges" data-reveal style="--d:.32s">
-          <span>🌱 Bebas Pestisida</span>
-          <span>💧 Nutrisi Terkontrol</span>
-          <span>🍈 Wisata Petik Melon</span>
+          <span><Fragment set:html={icons.leaf} /> Bebas Pestisida</span>
+          <span><Fragment set:html={icons.droplet} /> Nutrisi Terkontrol</span>
+          <span><Fragment set:html={icons.melon} /> Wisata Petik Melon</span>
         </div>
       </div>
     </div>
 
     <aside class="hero-card" aria-hidden="true">
-      <div class="hc-top"><span class="hc-ic">🍈</span><b>Melon Premium</b></div>
+      <div class="hc-top"><span class="hc-ic"><Fragment set:html={icons.melon} /></span><b>Melon Premium</b></div>
       <div class="price">{site.hargaMelon}</div>
-      <p>3 varietas manis — Sweetnet 9, Lavender & Sweet Hami. Bisa petik sendiri di kebun.</p>
+      <p>3 varietas manis: Sweetnet 9, Lavender, dan Sweet Hami. Bisa petik sendiri di kebun.</p>
     </aside>
 
     <div class="scroll-hint" aria-hidden="true"></div>
@@ -97,7 +115,7 @@ const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentCol
       {[0, 1].map((i) => (
         <div class="trust-group" aria-hidden={i === 1 ? 'true' : undefined}>
           {site.kredibilitas.map((k) => (
-            <div class="trust-item"><span class="ic">{k.ikon}</span><p>{k.teks}</p></div>
+            <div class="trust-item"><span class="ic"><Fragment set:html={icons[k.ikon]} /></span><p>{k.teks}</p></div>
           ))}
         </div>
       ))}
@@ -113,7 +131,7 @@ const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentCol
         </figure>
         <figure class="collage-accent">
           <img src={site.tentangGambarAksen} alt="Pengecekan bobot melon di kebun" loading="lazy" />
-          <figcaption>✓ {site.tentangAksenTeks}</figcaption>
+          <figcaption><Fragment set:html={icons.check} /> {site.tentangAksenTeks}</figcaption>
         </figure>
         <div class="rot-badge" aria-hidden="true">
           <svg viewBox="0 0 120 120">
@@ -192,7 +210,7 @@ const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentCol
       <div class="why-grid">
         {site.keunggulan.map((k, i) => (
           <div class="why-card" data-reveal style={`--d:${i * 0.07}s`}>
-            <div class="ic">{k.ikon}</div>
+            <div class="ic"><Fragment set:html={icons[k.ikon]} /></div>
             <h3>{k.judul}</h3>
             <p>{k.teks}</p>
           </div>
@@ -215,7 +233,7 @@ const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentCol
         </figure>
       ))}
     </div>
-    <p class="galeri-hint" aria-hidden="true">← geser untuk melihat →</p>
+    <p class="galeri-hint" aria-hidden="true"><Fragment set:html={icons.chevronL} /> Geser untuk melihat <Fragment set:html={icons.chevronR} /></p>
   </section>
 
   <!-- AGROWISATA & EDUKASI -->
@@ -224,13 +242,13 @@ const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentCol
       <div class="section-head" data-reveal>
         <span class="eyebrow">Kunjungi Kebun Kami</span>
         <h2>Agrowisata & <span class="accent-i">Edukasi</span></h2>
-        <p>Bukan sekadar membeli — datang, petik sendiri, dan belajar langsung di greenhouse kami.</p>
+        <p>Bukan sekadar membeli. Datang, petik sendiri, dan belajar langsung di greenhouse kami.</p>
       </div>
       <div class="wisata-cards">
         <article class="wisata-card" data-reveal>
           <div class="wc-img">
             <img src={site.wisataGambar} alt="Wisata petik melon" loading="lazy" />
-            <span class="wc-tag">🎫 Tiket Masuk Gratis</span>
+            <span class="wc-tag"><Fragment set:html={icons.ticket} /> Tiket Masuk Gratis</span>
           </div>
           <div class="wc-body">
             <h3>{site.wisataJudul}</h3>
@@ -242,7 +260,7 @@ const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentCol
         <article class="wisata-card" data-reveal style="--d:.12s">
           <div class="wc-img">
             <img src={site.outingGambar} alt="Outing class edukasi sekolah" loading="lazy" />
-            <span class="wc-tag">🎓 Untuk Sekolah</span>
+            <span class="wc-tag"><Fragment set:html={icons.cap} /> Untuk Sekolah</span>
           </div>
           <div class="wc-body">
             <h3>{site.outingJudul}</h3>
@@ -274,7 +292,7 @@ const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentCol
         ))}
       </div>
       <div class="market-note" data-reveal>
-        <p>Salad & sayuran juga tersedia di aplikasi favorit Anda — cari <strong>"Sanjaya Salad"</strong>:</p>
+        <p>Salad & sayuran juga tersedia di aplikasi favorit Anda. Cari <strong>"Sanjaya Salad"</strong>:</p>
         <div class="market-chips">
           {site.marketplace.map((m) => <span>{m}</span>)}
         </div>
@@ -288,7 +306,7 @@ const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentCol
       <div class="cta-panel hero-grain" data-reveal>
         <div class="cta-inner">
           <h2>Siap menikmati <em>panen terbaik</em> minggu ini?</h2>
-          <p>Stok melon & sayuran segar terbatas setiap panen. Hubungi kami sekarang — dijamin fresh dari greenhouse.</p>
+          <p>Stok melon & sayuran segar terbatas setiap panen. Hubungi kami sekarang, dijamin fresh dari greenhouse.</p>
           <div class="cta-actions">
             <a href={waUmum} class="btn btn-wa btn-lg" target="_blank" rel="noopener">
               <Fragment set:html={waIcon} /> Chat WhatsApp
@@ -352,7 +370,7 @@ const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentCol
           <img src="/images/logo-sanjaya.png" alt="Logo" width="48" height="48" />
           <span><b>{site.namaLengkap}</b><small>{site.tagline}</small></span>
         </div>
-        <p>Melon & sayuran hidroponik segar, higienis, dan bebas pestisida — dibudidayakan penuh cinta dari Kota Kediri, Jawa Timur.</p>
+        <p>Melon & sayuran hidroponik segar, higienis, dan bebas pestisida, dibudidayakan penuh cinta dari Kota Kediri, Jawa Timur.</p>
       </div>
       <div class="footer-col">
         <h4>Navigasi</h4>
@@ -373,7 +391,7 @@ const waIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentCol
     </div>
     <div class="container footer-bottom">
       <span>© {new Date().getFullYear()} {site.namaLengkap}. Seluruh hak cipta dilindungi.</span>
-      <span>{site.tagline} 🌱</span>
+      <span>{site.tagline}</span>
     </div>
   </footer>
 

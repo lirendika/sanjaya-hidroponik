@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import site from '../data/site.json';
 const {
-  title = `${site.namaLengkap} — ${site.tagline}`,
+  title = `${site.namaLengkap} | ${site.tagline}`,
   description = 'Melon dan sayuran hidroponik segar, higienis, dan bebas pestisida dari Kediri. Pesan mudah via WhatsApp.',
 } = Astro.props;
 const ogImage = new URL(site.heroGambar, Astro.site).href;

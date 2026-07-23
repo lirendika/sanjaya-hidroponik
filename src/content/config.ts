@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 
-// Koleksi Produk — setiap file .md di src/content/produk/ menjadi satu kartu produk.
+// Koleksi Produk: setiap file .md di src/content/produk/ menjadi satu kartu produk.
 // Bisa diedit lewat CMS di /admin tanpa menyentuh kode.
 const produk = defineCollection({
   type: 'content',

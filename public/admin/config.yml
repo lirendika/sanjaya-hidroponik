@@ -1,4 +1,4 @@
-# Konfigurasi Decap CMS — panel kelola konten di /admin
+# Konfigurasi Decap CMS: panel kelola konten di /admin
 # Pemilik login pakai email (Netlify Identity), lalu edit lewat form.
 
 backend:
@@ -21,7 +21,7 @@ collections:
     folder: "src/content/produk"
     create: true
     slug: "{{slug}}"
-    summary: "{{nama}} — {{kategori}}"
+    summary: "{{nama}} ({{kategori}})"
     sortable_fields: ["urutan", "nama", "kategori"]
     fields:
       - { label: "Nama Produk", name: "nama", widget: "string" }
@@ -32,7 +32,7 @@ collections:
       - { label: "Harga (mis. Rp 27.000 / kg, atau: Hubungi via WhatsApp)", name: "harga", widget: "string" }
       - { label: "Foto Produk", name: "gambar", widget: "image", choose_url: false }
       - { label: "Deskripsi Singkat", name: "deskripsi", widget: "text" }
-      - { label: "Label (mis. Terlaris / Best Seller — kosongkan bila tidak ada)", name: "badge", widget: "string", required: false, default: "" }
+      - { label: "Label (mis. Terlaris / Best Seller, kosongkan bila tidak ada)", name: "badge", widget: "string", required: false, default: "" }
       - { label: "Tersedia / Ada Stok?", name: "tersedia", widget: "boolean", default: true }
       - { label: "Urutan Tampil (angka kecil tampil lebih dulu)", name: "urutan", widget: "number", default: 99, value_type: "int" }
       - { label: "Keterangan Tambahan (opsional)", name: "body", widget: "markdown", required: false }
@@ -68,14 +68,22 @@ collections:
             name: "kredibilitas"
             widget: "list"
             fields:
-              - { label: "Ikon (emoji)", name: "ikon", widget: "string" }
+              - label: "Ikon"
+                name: "ikon"
+                widget: "select"
+                hint: "Pilih ikon garis yang sesuai."
+                options: ["sprout", "leaf", "shield", "droplet", "calendar", "truck", "building", "cap", "melon", "ticket"]
               - { label: "Teks", name: "teks", widget: "string" }
 
           - label: "Keunggulan"
             name: "keunggulan"
             widget: "list"
             fields:
-              - { label: "Ikon (emoji)", name: "ikon", widget: "string" }
+              - label: "Ikon"
+                name: "ikon"
+                widget: "select"
+                hint: "Pilih ikon garis yang sesuai."
+                options: ["sprout", "leaf", "shield", "droplet", "calendar", "truck", "building", "cap", "melon", "ticket"]
               - { label: "Judul", name: "judul", widget: "string" }
               - { label: "Penjelasan", name: "teks", widget: "text" }
 

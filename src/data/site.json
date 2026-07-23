@@ -3,12 +3,12 @@
   "namaLengkap": "PT Sanjaya Mirai Hidroponik",
   "tagline": "Future of Sustainable Harvest",
   "heroJudul": "Melon & Sayuran Hidroponik Segar dari Kediri",
-  "heroSubjudul": "Dibudidayakan higienis dengan sistem fertigasi, nutrisi terkontrol, dan tanpa pestisida — langsung dari greenhouse kami untuk meja makan Anda.",
+  "heroSubjudul": "Dibudidayakan higienis dengan sistem fertigasi, nutrisi terkontrol, dan tanpa pestisida. Langsung dari greenhouse kami untuk meja makan Anda.",
   "heroGambar": "/images/hero-greenhouse.jpg",
   "waNomor": "6281339220499",
   "waTeksDefault": "Halo Sanjaya Hidroponik, saya ingin memesan produk hidroponik.",
 
-  "tentangTeks": "PT Sanjaya Mirai Hidroponik adalah usaha agribisnis hidroponik di Kota Kediri yang membudidayakan melon premium dan aneka sayuran segar. Berawal sejak 2019 dari kebun hidroponik rumahan, kami kini tumbuh menjadi produsen buah dan sayur yang dipercaya pasar, swalayan, serta sekolah di Kediri. Seluruh tanaman dirawat dengan sistem fertigasi — pemberian nutrisi terukur — sehingga hasilnya bersih, segar, dan bebas pestisida. Kami juga membuka Wisata Petik Melon dan program Outing Class edukatif untuk keluarga dan sekolah.",
+  "tentangTeks": "PT Sanjaya Mirai Hidroponik adalah usaha agribisnis hidroponik di Kota Kediri yang membudidayakan melon premium dan aneka sayuran segar. Berawal sejak 2019 dari kebun hidroponik rumahan, kami kini tumbuh menjadi produsen buah dan sayur yang dipercaya pasar, swalayan, serta sekolah di Kediri. Seluruh tanaman dirawat dengan sistem fertigasi (pemberian nutrisi terukur) sehingga hasilnya bersih, segar, dan bebas pestisida. Kami juga membuka Wisata Petik Melon dan program Outing Class edukatif untuk keluarga dan sekolah.",
   "tentangGambar": "/images/greenhouse-tentang.jpg",
   "tentangGambarAksen": "/images/monitoring-kualitas.jpg",
   "tentangAksenTeks": "Kontrol kualitas & bobot di tiap panen",
@@ -16,18 +16,18 @@
   "hargaMelon": "Rp 27.000 / kg",
 
   "kredibilitas": [
-    { "ikon": "🌿", "teks": "Berkebun hidroponik sejak 2019" },
-    { "ikon": "🚫", "teks": "100% tanpa pestisida" },
-    { "ikon": "🏛️", "teks": "Aktif di program pertanian Kota Kediri" },
-    { "ikon": "🎓", "teks": "Dipercaya untuk Outing Class sekolah" }
+    { "ikon": "sprout", "teks": "Berkebun hidroponik sejak 2019" },
+    { "ikon": "shield", "teks": "100% tanpa pestisida" },
+    { "ikon": "building", "teks": "Aktif di program pertanian Kota Kediri" },
+    { "ikon": "cap", "teks": "Dipercaya untuk Outing Class sekolah" }
   ],
 
   "keunggulan": [
-    { "ikon": "🌱", "judul": "Segar Setiap Panen", "teks": "Dipetik saat matang optimal, langsung dari greenhouse — bukan stok lama." },
-    { "ikon": "🚫", "judul": "Bebas Pestisida", "teks": "Perawatan hidroponik higienis tanpa pestisida, aman dikonsumsi keluarga." },
-    { "ikon": "💧", "judul": "Nutrisi Terkontrol", "teks": "Sistem fertigasi menjaga nutrisi tanaman tepat takaran setiap hari." },
-    { "ikon": "📅", "judul": "Panen Terjadwal", "teks": "Produksi rutin sehingga ketersediaan produk lebih terjaga." },
-    { "ikon": "🛵", "judul": "Antar / Ambil di Tempat", "teks": "Bisa diantar area Kediri, atau ambil langsung di kebun kami." }
+    { "ikon": "sprout", "judul": "Segar Setiap Panen", "teks": "Dipetik saat matang optimal, langsung dari greenhouse, bukan stok lama." },
+    { "ikon": "shield", "judul": "Bebas Pestisida", "teks": "Perawatan hidroponik higienis tanpa pestisida, aman dikonsumsi keluarga." },
+    { "ikon": "droplet", "judul": "Nutrisi Terkontrol", "teks": "Sistem fertigasi menjaga nutrisi tanaman tepat takaran setiap hari." },
+    { "ikon": "calendar", "judul": "Panen Terjadwal", "teks": "Produksi rutin sehingga ketersediaan produk lebih terjaga." },
+    { "ikon": "truck", "judul": "Antar / Ambil di Tempat", "teks": "Bisa diantar area Kediri, atau ambil langsung di kebun kami." }
   ],
 
   "caraPesan": [
@@ -48,13 +48,9 @@
   "alamat": "Jl. Suparjan Mangun Wijaya No.145 B, Bujel, Kec. Mojoroto, Kota Kediri, Jawa Timur 64113",
   "lokasiKebun": "Kebun & Wisata Petik Melon: Timur Terminal Tamanan, Kel. Tamanan, Kec. Mojoroto, Kota Kediri (cari di Google Maps: \"Sanjaya & TT Hidroponik Melon\").",
   "mapsQuery": "Sanjaya & TT Hidroponik Melon Kediri",
-  "jamBuka": "Setiap hari, 08.00 – 17.00 WIB",
+  "jamBuka": "Setiap hari, pukul 08.00 sampai 17.00 WIB",
   "instagram": "sanjaya_hidroponik",
   "direktur": "Shandi Bangun Purwantoro, A.Md.",
-
-  "wisataJudul": "Wisata Petik Melon",
-  "wisataTeks": "Datang dan petik melon langsung dari pohonnya di greenhouse kami! Cocok untuk keluarga dan komunitas. Tiket masuk gratis — Anda hanya membayar melon yang dipetik.",
-  "wisataGambar": "/images/wisata-petik.jpg",
 
   "galeri": [
     { "gambar": "/images/galeri-bibit-melon.jpg", "keterangan": "Bibit melon tumbuh sehat" },
@@ -68,6 +64,10 @@
   ],
 
   "outingJudul": "Outing Class & Edukasi Sekolah",
-  "outingTeks": "Ajak siswa belajar langsung di kebun hidroponik! Anak-anak memetik melon dari pohonnya dan membuat olahan sehat seperti salad buah melon — pengalaman edukatif yang menyenangkan. Telah dipercaya oleh TKIT Al Azhar Kediri, TK ABA, dan sekolah lainnya.",
-  "outingGambar": "/images/outing-class.jpg"
+  "outingTeks": "Ajak siswa belajar langsung di kebun hidroponik. Anak-anak memetik melon dari pohonnya dan membuat olahan sehat seperti salad buah melon, pengalaman edukatif yang menyenangkan. Telah dipercaya oleh TKIT Al Azhar Kediri, TK ABA, dan sekolah lainnya.",
+  "outingGambar": "/images/outing-class.jpg",
+
+  "wisataJudul": "Wisata Petik Melon",
+  "wisataTeks": "Datang dan petik melon langsung dari pohonnya di greenhouse kami. Cocok untuk keluarga dan komunitas. Tiket masuk gratis, Anda hanya membayar melon yang dipetik.",
+  "wisataGambar": "/images/wisata-petik.jpg"
 }
